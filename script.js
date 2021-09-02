@@ -1,9 +1,10 @@
 
-function Hero(image, top, left, size) {
+function Hero(image, top, left, size, speed) {
   this.image = image;
   this.top = top;
   this.left = left;
   this.size = size;
+  this.speed = speed;
 
   this.getHeroElement = function () {
     return '<img width="' + this.size + '"' +
@@ -13,42 +14,39 @@ function Hero(image, top, left, size) {
   }
 
   this.moveRight = function () {
-    this.left += 50;
+    this.left += this.speed;
     console.log('right: ' + this.left);
   }
   this.moveDown = function () {
-    this.top += 50;
+    this.top += this.speed;
     console.log('down: ' + this.top);
   }
-//   this.moveLeft() = function () {
-//     this.left -= 50;
-//     console.log('ok: ' + this.left)
-//   }
-//   this.moveUp = function () {
-//     this.top -= 50;
-//     console.log('ok: ' + this.top);
-//   }
+  this.moveLeft = function () {
+    this.left -= this.speed;
+    console.log('ok: ' + this.left);
+  }
+  this.moveTop = function () {
+    this.top -= this.speed;
+    console.log('ok: ' + this.top);
+  }
 }
-var hero = new Hero('LONG4599.jpg', 20, 30, 200);
+let speed = +prompt("enter to speed: ");
+var hero = new Hero('LONG4599.JPG', 0, 0, 200, speed);
 
 function start() {
-  if (hero.left < window.innerWidth - hero.size) {
+  if (hero.top === 0 && hero.left < window.innerWidth - hero.size) {
     hero.moveRight();
-
-  }
-  if (hero.size == window.window.innerWidth - hero.size && hero.top < window.innerHeight - hero.size) {
+  } else if (hero.top < window.innerHeight - hero.size && hero.left >= window.innerWidth - hero.size) {
     hero.moveDown();
+  } else if (hero.left > 0) {
+    hero.moveLeft()
+  } else if (hero.top > 0) {
+    hero.moveTop()
   }
   document.getElementById('game').innerHTML = hero.getHeroElement();
-  setTimeout(start, 500)
+  setTimeout(start, 20)
 }
 
 start();
-// start1();
-// function start1() {
-//   if (hero.top < window.innerHeight - hero.size) {
-//     hero.moveDown();
-//   }
-//   document.getElementById('game').innerHTML = hero.getHeroElement();
-//   setTimeout(start1, 500)
-// }
+
+
