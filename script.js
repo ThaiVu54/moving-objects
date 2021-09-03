@@ -23,11 +23,11 @@ function Hero(image, top, left, size, speed) {
   }
   this.moveLeft = function () {
     this.left -= this.speed;
-    console.log('ok: ' + this.left);
+    console.log('left: ' + this.left);
   }
   this.moveTop = function () {
     this.top -= this.speed;
-    console.log('ok: ' + this.top);
+    console.log('up: ' + this.top);
   }
 }
 let speed = +prompt("enter to speed: ");
